@@ -83,7 +83,7 @@ export default {
 <style scoped>
 h4 {
   color: black;
-  padding: 5px 0px;
+  padding: 3px 0px;
 }
 #stats{
   color: #4d4d4d;

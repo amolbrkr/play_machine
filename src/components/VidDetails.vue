@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="vidObj">
   <p id="vid-title">
     <h4>{{ vidObj.items[0].snippet.title }}</h4>
   </p>
