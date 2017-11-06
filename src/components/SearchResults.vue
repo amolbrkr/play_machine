@@ -1,7 +1,11 @@
 <template>
   <div>
     <app-banner></app-banner>
-
+    <div v-if="resultIds">
+      <div v-for="resId in resultIds.items">
+        <vid-preview :vidId="resId.id.videoId"></vid-preview>
+      </div>
+    </div>
     <div v-if="errors.length">
       <app-error :err="errors"></app-error>
     </div>
@@ -18,7 +22,12 @@ export default {
       errors: []
     }
   },
-  created() {
+  watch: {
+    '$route.params.query'(newQuery, oldQuery) {
+      this.$router.push('/search/' + newQuery)
+    }
+  },
+  mounted() {
     axios.get(`https://www.googleapis.com/youtube/v3/search/`, {
       params: {
         part: 'id',
