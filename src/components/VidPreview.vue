@@ -83,17 +83,15 @@ export default {
 <style scoped>
 h4 {
   color: black;
-  padding: 3px 0px;
+  padding: 2px 0px;
 }
 #stats{
   color: #4d4d4d;
   font-size: 11;
 }
-
 #preview {
   padding: 2px;
 }
-
 span+span {
   margin-left: 12px;
 }

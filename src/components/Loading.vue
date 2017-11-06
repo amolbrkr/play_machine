@@ -6,8 +6,8 @@
     <div class="sk-cube4 sk-cube"></div>
     <div class="sk-cube3 sk-cube"></div>
   </div>
-  <p style="color:#1FBD9D" class="text-center">
-    LOADING...
+  <p style="color:#17A2B8" class="text-center">
+    LOADING
   </p>
 </div>
 </template>
