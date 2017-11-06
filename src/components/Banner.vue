@@ -6,7 +6,7 @@
         <b-btn size="sm" variant="outline-light" @click="searchVideo"><i class="fa fa-search"></i></b-btn>
       </b-nav-form>
       <b-form-input v-if="showSearchInput" v-model="query" type="text" placeholder="Search"></b-form-input>
-    </b-navbar>            
+    </b-navbar>
   </div>
 </template>
 
@@ -22,7 +22,6 @@ export default {
     searchVideo() {
       this.showSearchInput = !this.showSearchInput
       if(this.query !== '') {
-        console.log("SEARCH QUERY: " + this.query)
         this.$router.push('/search/' + this.query)
         this.query = ''
       }
@@ -30,7 +29,7 @@ export default {
     brandClicked() {
       this.$router.push('/');
     }
-  } 
+  }
 }
 </script>
 
