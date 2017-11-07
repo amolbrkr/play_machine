@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <p id="vid-title">
-      <h4>{{ vidObj.items[0].snippet.title }}</h4>
-    </p>
-    <div v-if="errors && errors.length">
-      <app-error :err="errors"></app-error>
-    </div>
+<div v-if="vidObj" id="vid-details">
+  <p id="vid-title">
+    <h4>{{ vidObj.items[0].snippet.title }}</h4>
+  </p>
+  <div v-if="errors && errors.length">
+    <app-error :err="errors"></app-error>
   </div>
+</div>
 </template>
 
 
@@ -16,13 +16,13 @@ import axios from 'axios'
 
 export default {
   name: 'vid-details',
-    props: ['vidId'],
-    data() {
-      return {
-        vidObj: null,
-        errors: []
-      }
-    },
+  props: ['vidId'],
+  data() {
+    return {
+      vidObj: null,
+      errors: []
+    }
+  },
 
   created() {
     axios.get(`https://www.googleapis.com/youtube/v3/videos/`, {
@@ -36,7 +36,12 @@ export default {
     }).catch(e => {
       this.errors.push(e);
     })
-
   }
 }
 </script>
+
+<style scoped>
+#vid-details {
+  padding: 5px;
+}
+</style>

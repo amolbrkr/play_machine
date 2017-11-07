@@ -1,4 +1,4 @@
-# PlayMachine
+# PlayMachine -- WIP
 ### A YouTube read-only PWA built with Vue.js :)
 ---
 

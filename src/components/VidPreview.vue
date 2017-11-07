@@ -1,26 +1,31 @@
 <template>
-<div v-if="vidInfo">
-  <b-card @click="playVid()" :title="vidTitle"
-  :sub-title="vidInfo.items[0].snippet.channelTitle" :img-src="vidInfo.items[0].snippet.thumbnails.high.url" img-top >
-      <p id="stats" class="card-text">
-      <span>
+<div id="preview" @click="playVid" v-if="vidInfo">
+  <b-img :src="vidInfo.items[0].snippet.thumbnails.high.url" fluid-grow alt="video thumbnail" />
+  <h4><span>{{ vidTitle }}</span></h4>
+  <h5>
+    <i class="fa fa-user-o"></i>
+    {{ vidInfo.items[0].snippet.channelTitle }}
+  </h5>
+  <p id="stats">
+    <span>
         <i class="fa fa-eye"></i>
         {{ countFormatter(vidInfo.items[0].statistics.viewCount) }}
+        VIEWS
       </span>
-      <span>
+    <span>
         <i class="fa fa-thumbs-o-up"></i>
         {{ countFormatter(vidInfo.items[0].statistics.likeCount) }}
       </span>
-      <span>
+    <span>
         <i class="fa fa-thumbs-o-down"></i>
         {{ countFormatter(vidInfo.items[0].statistics.dislikeCount) }}
       </span>
-      <span>
+    <span>
         <i class="fa fa-comment-o"></i>
         {{ countFormatter(vidInfo.items[0].statistics.commentCount) }}
       </span>
-      </p>
-  </b-card>
+  </p>
+  <hr>
   <div v-if="errors && errors.length">
     <app-error :err="errors"></app-error>
   </div>
@@ -40,14 +45,14 @@ export default {
   },
   computed: {
     vidTitle() {
-      return this.vidInfo.items[0].snippet.title.substring(0, 29) + '  ...'
+      return this.vidInfo.items[0].snippet.title.substring(0, 29) + '...'
     }
   },
   methods: {
     countFormatter(n) {
-      if(n > 999 && n < 999999) {
+      if (n > 999 && n < 999999) {
         return (n / 1000).toFixed(0) + 'K'
-      } else if(n > 999999) {
+      } else if (n > 999999) {
         return (n / 1000000).toFixed(1) + 'M'
       } else {
         return n
@@ -59,7 +64,7 @@ export default {
     }
   },
   created() {
-        axios.get(`https://www.googleapis.com/youtube/v3/videos/`, {
+    axios.get(`https://www.googleapis.com/youtube/v3/videos/`, {
       params: {
         part: 'snippet, statistics',
         id: this.vidId,
@@ -76,7 +81,19 @@ export default {
 </script>
 
 <style scoped>
-span + span {
+h4 {
+  color: black;
+  padding: 2px 0;
+  margin-bottom: 2px;
+}
+#stats{
+  color: #4d4d4d;
+  font-size: 11;
+}
+#preview {
+  padding: 2px;
+}
+span+span {
   margin-left: 12px;
 }
 </style>
