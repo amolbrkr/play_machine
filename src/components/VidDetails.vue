@@ -3,7 +3,10 @@
   <p id="vid-title">
     <h4>{{ vidObj.items[0].snippet.title }}</h4>
   </p>
-  <div v-if="errors && errors.length">
+  <b-img rounded="circle" width="50" height="50"
+   :src="channelData.items[0].snippet.thumbnails.medium.url" />
+   <strong> {{ channelData.items[0].snippet.title }} </strong>
+  <div v-if="errors.length">
     <app-error :err="errors"></app-error>
   </div>
 </div>
@@ -19,11 +22,11 @@ export default {
   props: ['vidId'],
   data() {
     return {
+      channelData: null,
       vidObj: null,
       errors: []
     }
   },
-
   created() {
     axios.get(`https://www.googleapis.com/youtube/v3/videos/`, {
       params: {
@@ -33,6 +36,18 @@ export default {
       }
     }).then(res => {
       this.vidObj = res.data;
+      //Get info about the Uploader
+      return axios.get(`https://www.googleapis.com/youtube/v3/channels/`, {
+        params: {
+          part: 'snippet, statistics',
+          id: res.data.items[0].snippet.channelId,
+          key: '{API KEY}'
+        }
+      }).then(r => {
+        this.channelData = r.data;
+      }).catch(e => {
+        this.errors.push(e);
+      })
     }).catch(e => {
       this.errors.push(e);
     })
