@@ -5,7 +5,7 @@
     <b-nav-form>
       <b-btn size="sm" variant="outline-light" @click="searchVideo"><i class="fa fa-search"></i></b-btn>
     </b-nav-form>
-    <b-form-input v-if="showSearchInput" v-model="searchQuery" type="text" placeholder="Search"></b-form-input>
+    <b-form-input v-if="showSearchInput" v-model="searchQuery" type="search" size="sm" placeholder="Search"></b-form-input>
   </b-navbar>
 </div>
 </template>

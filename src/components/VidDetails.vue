@@ -1,5 +1,5 @@
 <template>
-<div v-if="vidObj">
+<div v-if="vidObj" id="vid-details">
   <p id="vid-title">
     <h4>{{ vidObj.items[0].snippet.title }}</h4>
   </p>
@@ -39,3 +39,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#vid-details {
+  padding: 5px;
+}
+</style>

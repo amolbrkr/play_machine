@@ -46,6 +46,6 @@ export default {
 
 <style >
 #trend-list {
-  padding: 56px 5px 5px 5px;
+  padding: 56px 2px 2px 2px;
 }
 </style>
