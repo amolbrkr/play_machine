@@ -23,8 +23,11 @@ export default {
     }
   },
   watch: {
-    '$route.params.query'(newQuery, oldQuery) {
-      this.$router.push('/search/' + newQuery)
+    '$route.params.query' (newQuery, oldQuery) {
+      this.$router.push({
+        path: '/search/' + newQuery
+      })
+      console.log(this)
     }
   },
   mounted() {
@@ -44,6 +47,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
