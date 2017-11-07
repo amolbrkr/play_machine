@@ -9,16 +9,16 @@
   <p id="stats">
     <span>
         <i class="fa fa-eye"></i>
-        {{ countFormatter(vidInfo.items[0].statistics.viewCount) }}
+        {{ this.countFormatter(vidInfo.items[0].statistics.viewCount) }}
         VIEWS
       </span>
     <span>
         <i class="fa fa-thumbs-o-up"></i>
-        {{ countFormatter(vidInfo.items[0].statistics.likeCount) }}
+        {{ this.countFormatter(vidInfo.items[0].statistics.likeCount) }}
       </span>
     <span>
         <i class="fa fa-thumbs-o-down"></i>
-        {{ countFormatter(vidInfo.items[0].statistics.dislikeCount) }}
+        {{ this.countFormatter(vidInfo.items[0].statistics.dislikeCount) }}
       </span>
     <span>
         <i class="fa fa-comment-o"></i>
@@ -49,15 +49,6 @@ export default {
     }
   },
   methods: {
-    countFormatter(n) {
-      if (n > 999 && n < 999999) {
-        return (n / 1000).toFixed(0) + 'K'
-      } else if (n > 999999) {
-        return (n / 1000000).toFixed(1) + 'M'
-      } else {
-        return n
-      }
-    },
     playVid() {
       var _route = "/play/" + this.vidId
       this.$router.push(_route)
