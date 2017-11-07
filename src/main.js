@@ -25,6 +25,20 @@ Vue.component('app-error', AppError)
 Vue.component('app-loading', Loading)
 Vue.component('vid-preview', VidPreview)
 
+Vue.mixin({
+  methods: {
+    countFormatter(n) {
+      if (n > 999 && n < 999999) {
+        return (n / 1000).toFixed(0) + 'K';
+      } else if (n > 999999) {
+        return (n / 1000000).toFixed(1) + 'M';
+      } else {
+        return n;
+      }
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
