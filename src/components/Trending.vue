@@ -45,6 +45,10 @@ export default {
 </script>
 
 <style >
+h3 {line-height: 24px}
+#head {
+  padding: 5px;
+}
 #trend-list {
   padding: 56px 2px 2px 2px;
 }

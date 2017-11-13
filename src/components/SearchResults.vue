@@ -27,7 +27,6 @@ export default {
       this.$router.push({
         path: '/search/' + newQuery
       })
-      console.log(this)
     }
   },
   mounted() {
