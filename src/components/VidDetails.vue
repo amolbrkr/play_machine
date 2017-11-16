@@ -4,17 +4,38 @@
     <p id="vid-title">
       <h4>{{ vidObj.items[0].snippet.title }}</h4>
     </p>
+    <p id="stats">
+      <span>
+          <i class="fa fa-eye"></i>
+          {{ this.countFormatter(vidObj.items[0].statistics.viewCount) }}
+          VIEWS
+        </span>
+      <span>
+          <i class="fa fa-thumbs-o-up"></i>
+          {{ this.countFormatter(vidObj.items[0].statistics.likeCount) }}
+        </span>
+      <span>
+          <i class="fa fa-thumbs-o-down"></i>
+          {{ this.countFormatter(vidObj.items[0].statistics.dislikeCount) }}
+        </span>
+      <span>
+          <i class="fa fa-comment-o"></i>
+          {{ countFormatter(vidObj.items[0].statistics.commentCount) }}
+        </span>
+    </p>
     <div class="effect2" id="uploader-info" v-if="channelData">
       <b-img rounded="circle" width="50" height="50" :src="channelData.items[0].snippet.thumbnails.medium.url" />
       <strong> {{ channelData.items[0].snippet.title }}</strong>
       <span>&#11044; {{ this.countFormatter(channelData.items[0].statistics.subscriberCount) }} Suscribers </span>
     </div>
-    <div v-if="errors.length">
-      <app-error :err="errors"></app-error>
+    <div v-if="showDesc">
+      <hr>
+      <p> {{ vidObj.items[0].snippet.description }} </p>
+      <hr>
     </div>
   </div>
-  <div v-else>
-    <app-loading></app-loading>
+  <div v-if="errors.length">
+    <app-error :err="errors"></app-error>
   </div>
 </div>
 </template>
@@ -65,6 +86,14 @@ export default {
 <style scoped>
 h4 {
   padding-left: 5px;
+}
+
+#stats {
+  padding-left: 5px;
+}
+
+span+span {
+  margin-left: 12px;
 }
 
 #uploader-info {

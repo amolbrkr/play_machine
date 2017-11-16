@@ -1,26 +1,28 @@
 <template>
-<div>
+<div class="container">
   <div class="sk-folding-cube">
     <div class="sk-cube1 sk-cube"></div>
     <div class="sk-cube2 sk-cube"></div>
     <div class="sk-cube4 sk-cube"></div>
     <div class="sk-cube3 sk-cube"></div>
   </div>
-  <p style="color:#17A2B8" class="text-center">
-    LOADING
-  </p>
 </div>
 </template>
 
 
-<style>
-.sk-folding-cube {
+<style scoped>
+.container {
+  position: relative;
+}
 
-  margin-top: 300px !important;
-  margin: 20px auto;
+.sk-folding-cube {
+  left: 50%;
+  margin-left: -20px;
+  top: 50%;
+  margin-top: -20px;
   width: 40px;
   height: 40px;
-  position: relative;
+  position: absolute;
   -webkit-transform: rotateZ(45deg);
   transform: rotateZ(45deg);
 }

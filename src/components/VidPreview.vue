@@ -77,6 +77,7 @@ export default {
   font-size: 20px;
   font-weight: 300;
 }
+
 h4 {
   color: black;
   padding: 2px 0;
@@ -91,8 +92,9 @@ h4 {
 #preview {
   padding: 2px;
 }
-
-span+span {
+span + span {
   margin-left: 12px;
 }
+
+
 </style>
