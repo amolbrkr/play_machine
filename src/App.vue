@@ -1,21 +1,25 @@
 <template>
-  <div id="app">
-    <header>
-      <title>PlayMachine</title>
-    </header>
-    <main>
-      <router-view></router-view>
-    </main>
-  </div>
+<div id="app">
+  <header>
+    <title>PlayMachine</title>
+  </header>
+  <main>
+    <router-view></router-view>
+  </main>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
 }
 </script>
 
 <style>
+body {
+    background-color: #f9fafc;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

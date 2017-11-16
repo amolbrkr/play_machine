@@ -1,24 +1,24 @@
 <template>
 <div id="preview" @click="playVid" v-if="vidInfo">
   <b-img :src="vidInfo.items[0].snippet.thumbnails.high.url" fluid-grow alt="video thumbnail" />
-  <h4><span>{{ vidTitle }}</span></h4>
-  <h5>
+  <span class="title">{{ vidTitle }}</span>
+  <h6>
     <i class="fa fa-user-o"></i>
     {{ vidInfo.items[0].snippet.channelTitle }}
-  </h5>
+  </h6>
   <p id="stats">
     <span>
         <i class="fa fa-eye"></i>
-        {{ countFormatter(vidInfo.items[0].statistics.viewCount) }}
+        {{ this.countFormatter(vidInfo.items[0].statistics.viewCount) }}
         VIEWS
       </span>
     <span>
         <i class="fa fa-thumbs-o-up"></i>
-        {{ countFormatter(vidInfo.items[0].statistics.likeCount) }}
+        {{ this.countFormatter(vidInfo.items[0].statistics.likeCount) }}
       </span>
     <span>
         <i class="fa fa-thumbs-o-down"></i>
-        {{ countFormatter(vidInfo.items[0].statistics.dislikeCount) }}
+        {{ this.countFormatter(vidInfo.items[0].statistics.dislikeCount) }}
       </span>
     <span>
         <i class="fa fa-comment-o"></i>
@@ -45,19 +45,10 @@ export default {
   },
   computed: {
     vidTitle() {
-      return this.vidInfo.items[0].snippet.title.substring(0, 29) + '...'
+      return this.vidInfo.items[0].snippet.title.substring(0, 34) + '...'
     }
   },
   methods: {
-    countFormatter(n) {
-      if (n > 999 && n < 999999) {
-        return (n / 1000).toFixed(0) + 'K'
-      } else if (n > 999999) {
-        return (n / 1000000).toFixed(1) + 'M'
-      } else {
-        return n
-      }
-    },
     playVid() {
       var _route = "/play/" + this.vidId
       this.$router.push(_route)
@@ -81,19 +72,29 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  color: black;
+  font-size: 20px;
+  font-weight: 300;
+}
+
 h4 {
   color: black;
   padding: 2px 0;
   margin-bottom: 2px;
 }
-#stats{
+
+#stats {
   color: #4d4d4d;
-  font-size: 11;
+  vertical-align: middle;
 }
+
 #preview {
   padding: 2px;
 }
-span+span {
+span + span {
   margin-left: 12px;
 }
+
+
 </style>

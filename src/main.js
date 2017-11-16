@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
+import VueYouTubeEmbed from 'vue-youtube-embed'
 import App from './App'
 import router from './router'
 
@@ -16,6 +17,7 @@ import Loading from '@/components/Loading'
 import VidPreview from '@/components/VidPreview'
 
 Vue.use(BootstrapVue)
+Vue.use(VueYouTubeEmbed)
 
 Vue.config.productionTip = false
 
@@ -24,6 +26,30 @@ Vue.component('app-trending', Trending)
 Vue.component('app-error', AppError)
 Vue.component('app-loading', Loading)
 Vue.component('vid-preview', VidPreview)
+
+Vue.mixin({
+  methods: {
+    countFormatter(n) {
+      if (n > 999 && n < 999999) {
+        return (n / 1000).toFixed(0) + 'K';
+      } else if (n > 999999) {
+        return (n / 1000000).toFixed(1) + 'M';
+      } else {
+        return n;
+      }
+    }
+  }
+})
+
+//An empty vue instance to work as a communication bus between 2 non parent-child components.
+const  EventBus = new Vue()
+Object.defineProperties(Vue.prototype, {
+  $bus: {
+    get: function () {
+      return EventBus
+    }
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
