@@ -1,51 +1,46 @@
 <template>
-<div id="preview" @click="playVid" v-if="vidInfo">
-  <b-img :src="vidInfo.items[0].snippet.thumbnails.high.url" fluid-grow alt="video thumbnail" />
-  <span class="title">{{ vidTitle }}</span>
-  <h6>
-    <i class="fa fa-user-o"></i>
-    {{ vidInfo.items[0].snippet.channelTitle }}
-  </h6>
-  <p id="stats">
-    <span>
-        <i class="fa fa-eye"></i>
-        {{ this.countFormatter(vidInfo.items[0].statistics.viewCount) }}
-        VIEWS
-      </span>
-    <span>
-        <i class="fa fa-thumbs-o-up"></i>
-        {{ this.countFormatter(vidInfo.items[0].statistics.likeCount) }}
-      </span>
-    <span>
-        <i class="fa fa-thumbs-o-down"></i>
-        {{ this.countFormatter(vidInfo.items[0].statistics.dislikeCount) }}
-      </span>
-    <span>
-        <i class="fa fa-comment-o"></i>
-        {{ countFormatter(vidInfo.items[0].statistics.commentCount) }}
-      </span>
-  </p>
-  <hr>
-  <div v-if="errors && errors.length">
-    <app-error :err="errors"></app-error>
+  <div id="preview" @click="playVid" v-if="vidInfo">
+    <v-card :hover="true" :ripple="true" :tile="true">
+      <v-card-media :src="vidInfo.items[0].snippet.thumbnails.medium.url" height="180px">
+      </v-card-media>
+      <v-card-title primary-title>
+        <div>
+          <div class="title">{{ this.vidTitle }}</div>
+          <span class="grey--text">By {{ channelInfo.items[0].snippet.title }} </span>
+          <br>
+          <span>
+            <i class="material-icons md-18 align">visibility</i>
+            {{ this.countFormatter(vidInfo.items[0].statistics.viewCount) }}
+          </span>
+          <span>
+            <i class="material-icons md-18 align">thumb_up</i>
+            {{ this.countFormatter(vidInfo.items[0].statistics.likeCount) }}
+          </span>
+          <span>
+            <i class="material-icons md-18 align">thumb_down</i>
+            {{ this.countFormatter(vidInfo.items[0].statistics.dislikeCount) }}
+          </span>
+        </div>
+      </v-card-title>
+    </v-card>
   </div>
-</div>
 </template>
 
-<script>
-import axios from 'axios'
 
+
+<script>
 export default {
   props: ['vidId'],
   data() {
     return {
+      channelInfo: null,
       vidInfo: null,
       errors: []
     }
   },
   computed: {
     vidTitle() {
-      return this.vidInfo.items[0].snippet.title.substring(0, 34) + '...'
+      return this.vidInfo.items[0].snippet.title.substring(0, 29) + '...'
     }
   },
   methods: {
@@ -55,46 +50,24 @@ export default {
     }
   },
   created() {
-    axios.get(`https://www.googleapis.com/youtube/v3/videos/`, {
-      params: {
-        part: 'snippet, statistics',
-        id: this.vidId,
-        key: '{API KEY}'
-      }
-    }).then(res => {
-      this.vidInfo = res.data;
-    }).catch(e => {
-      this.errors.push(e);
+    this.getCompleteVideoData(this.vidId).then(_data => {
+      this.vidInfo = _data.vidInfo.data;
+      this.channelInfo = _data.channelData.data;
     })
-
   }
 }
+
 </script>
 
 <style scoped>
 .title {
-  color: black;
-  font-size: 20px;
-  font-weight: 300;
+  font-size: 20px !important;
+  font-weight: 400;
+  line-height: 24px !important;
+  letter-spacing: normal !important;
 }
 
-h4 {
-  color: black;
-  padding: 2px 0;
-  margin-bottom: 2px;
-}
-
-#stats {
-  color: #4d4d4d;
-  vertical-align: middle;
-}
-
-#preview {
-  padding: 2px;
-}
 span + span {
   margin-left: 12px;
 }
-
-
 </style>

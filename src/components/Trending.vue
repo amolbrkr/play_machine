@@ -1,18 +1,26 @@
 <template>
-<div>
-  <app-banner></app-banner>
-  <div id="trend-list" v-if="yt_trends">
-    <div v-for="(vid, idx) in yt_trends.items">
-      <vid-preview :vidId="vid.id"></vid-preview>
+  <div>
+    <div style="padding-left: 16px;">
+      <h2>
+        <i class="material-icons">trending_up</i> Trending Top 50
+      </h2>
     </div>
-    <div v-if="errors && errors.length">
-      <app-error :err="errors"></app-error>
+    <div id="trend-list" v-if="yt_trends">
+      <v-container fluid grid-list-lg>
+        <v-layout row wrap>
+          <div v-for="(vid, idx) in yt_trends.items">
+            <v-flex xs12>
+              <vid-preview :vidId="vid.id"></vid-preview>
+            </v-flex>
+          </div>
+        </v-layout>
+      </v-container>
+
+      <div v-if="errors && errors.length">
+        <app-error :err="errors"></app-error>
+      </div>
     </div>
   </div>
-  <div v-else>
-    <app-loading></app-loading>
-  </div>
-</div>
 </template>
 
 <script>
@@ -43,13 +51,3 @@ export default {
   }
 }
 </script>
-
-<style >
-h3 {line-height: 24px}
-#head {
-  padding: 5px;
-}
-#trend-list {
-  padding: 56px 2px 2px 2px;
-}
-</style>

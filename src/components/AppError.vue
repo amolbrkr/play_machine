@@ -1,9 +1,14 @@
 <template>
-  <b-card class="text-center" title="ERROR!" text-variant="light" bg-variant="dark">
-      <p class="card-text">
-          {{ err }}
-      </p>
-  </b-card>
+  <md-card class="md-primary" md-theme="black-card">
+      <md-card-header>
+        <md-card-header-text>
+          <div class="md-title">ERROR!</div>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        {{ err }}
+      </md-card-content>
+    </md-card>
 </template>
 
 <script>
@@ -12,5 +17,3 @@ export default {
     props: ['err']
 }
 </script>
-
-

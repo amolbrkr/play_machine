@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <app-banner></app-banner>
-    <div v-if="resultIds">
-      <div v-for="resId in resultIds.items">
-        <vid-preview :vidId="resId.id.videoId"></vid-preview>
-      </div>
-    </div>
-    <div v-if="errors.length">
-      <app-error :err="errors"></app-error>
-    </div>
+<div>
+  <div v-if="resultIds">
+    <v-container fluid grid-list-lg>
+      <v-layout row wrap>
+        <div v-for="resId in resultIds.items">
+          <v-flex xs12>
+            <vid-preview :vidId="resId.id.videoId"></vid-preview>
+          </v-flex>
+        </div>
+      </v-layout>
+    </v-container>
   </div>
+  <div v-if="errors.length">
+    <app-error :err="errors"></app-error>
+  </div>
+</div>
 </template>
 
 <script>
